@@ -23,6 +23,16 @@ describe Tapirgo::Search do
   let(:query) { 'successful test' }
   let(:search) { Tapirgo::Search.new(token, query) }
 
+  describe '#initialize' do
+    it 'sets up a token instance variable' do
+      expect(search.instance_variable_get(:@token)).to eq(token)
+    end
+
+    it 'sets up a query instance variable' do
+      expect(search.instance_variable_get(:@query)).to eq(query)
+    end
+  end
+
   describe '#get' do
     let(:code) { nil }
     let(:to_s) { nil }

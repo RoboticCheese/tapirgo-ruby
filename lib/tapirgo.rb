@@ -19,6 +19,7 @@
 
 require 'tapirgo/errors'
 require 'tapirgo/search'
+require 'tapirgo/search/result'
 require 'tapirgo/version'
 
 # vim: ai et ts=2 sts=2 sw=2 ft=ruby

@@ -17,38 +17,47 @@
 # limitations under the License.
 #
 
-require 'rest-client'
-require 'uri'
-require 'tapirgo/search/result'
+require 'json'
 
 module Tapirgo
-  # Tapir search class
-  #
-  # @author Jonathan Hartman <j@p4nt5.com>
   class Search
-    include Errors
+    # Tapir search result class
+    #
+    # @author Jonathan Hartman <j@p4nt5.com>
+    class Result
+      include Errors
 
-    def initialize(token, query_str)
-      @token = token
-      @query = query_str
-    end
+      def initialize(result_str)
+        @json = JSON.parse(result_str)
+      end
 
-    private
+      def title
+        @title ||= json['title']
+      end
 
-    attr_reader :token
+      def score
+        @score ||= json['_score']
+      end
 
-    def get
-      response = RestClient.get(uri, accept: :json)
-      response.code == 200 || fail(HTTPError, response)
-      response.to_s
-    end
+      def link
+        @link ||= json['link']
+      end
 
-    def uri
-      "http://www.tapirgo.com/api/1/search.json?token=#{token}&query=#{query}"
-    end
+      def content
+        @content ||= json['content']
+      end
 
-    def query
-      URI.escape(@query)
+      def summary
+        @summary ||= json['summary']
+      end
+
+      def published
+        @published ||= json['published_on']
+      end
+
+      private
+
+      attr_accessor :json
     end
   end
 end
