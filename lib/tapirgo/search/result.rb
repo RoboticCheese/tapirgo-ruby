@@ -27,8 +27,13 @@ module Tapirgo
     class Result
       include Errors
 
-      def initialize(result_str)
-        @json = JSON.parse(result_str)
+      def initialize(result)
+        @json = case result
+                when Hash
+                  result
+                when String
+                  JSON.parse(result)
+                end
       end
 
       def title

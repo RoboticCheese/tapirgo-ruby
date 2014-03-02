@@ -26,7 +26,7 @@ describe Tapirgo::Search::Result do
   let(:content) { "Lucas ipsum dolor sit amet organa lars kashyyk moff.\n" }
   let(:summary) { nil }
   let(:published) { '2014-02-22T02:34:00Z' }
-  let(:result_str) do
+  let(:input) do
     "{\"title\":\"#{title}\"," \
     "\"_score\":#{score || 'null'}," \
     "\"link\":\"#{link}\"," \
@@ -34,12 +34,30 @@ describe Tapirgo::Search::Result do
     "\"summary\":#{summary || 'null'}," \
     "\"published_on\":\"#{published}\"}"
   end
-  let(:json) { JSON.parse(result_str) }
-  let(:result) { Tapirgo::Search::Result.new(result_str) }
+  let(:json) { input.class == String ? JSON.parse(input) : input }
+  let(:result) { Tapirgo::Search::Result.new(input) }
 
   describe '#initialize' do
-    it 'parses and stores the passed-in JSON' do
-      expect(result.instance_variable_get(:@json)).to eq(json)
+    context 'JSON string input' do
+      it 'parses and stores the JSON input' do
+        expect(result.instance_variable_get(:@json)).to eq(json)
+      end
+    end
+
+    context 'Hash input' do
+      let(:input) do
+        {
+          'title' => title,
+          '_score' => score,
+          'link' => link,
+          'content' => content,
+          'summary' => summary,
+          'published_on' => published
+        }
+      end
+      it 'stores the Hash input' do
+        expect(result.instance_variable_get(:@json)).to eq(input)
+      end
     end
   end
 
