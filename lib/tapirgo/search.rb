@@ -31,6 +31,7 @@ module Tapirgo
     def initialize(token, query_str)
       @token = token
       @query = query_str
+      @results = JSON.parse(get).map { |r| Search::Result.new(r) }
     end
 
     private

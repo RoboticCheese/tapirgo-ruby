@@ -17,13 +17,24 @@
 # limitations under the License.
 
 require_relative '../spec_helper'
+require 'json'
 
 describe Tapirgo::Search do
   let(:token) { 'xyz123' }
   let(:query) { 'successful test' }
   let(:search) { Tapirgo::Search.new(token, query) }
+  let(:code) { 200 }
+  let(:to_s) { '[{"things": [1, 2, 3]}]' }
+  let(:api_get) { double(code: code, to_s: to_s) }
+
+  before(:each) do
+    RestClient.stub(:get).and_return(api_get)
+    Tapirgo::Search::Result.stub(:new) { |r| r }
+  end
 
   describe '#initialize' do
+    before(:each) { Tapirgo::Search.stub(:get).and_return(to_s) }
+
     it 'sets up a token instance variable' do
       expect(search.instance_variable_get(:@token)).to eq(token)
     end
@@ -31,19 +42,14 @@ describe Tapirgo::Search do
     it 'sets up a query instance variable' do
       expect(search.instance_variable_get(:@query)).to eq(query)
     end
+
+    it 'saves the set of search results' do
+      expect(search.instance_variable_get(:@results)).to eq(JSON.parse(to_s))
+    end
   end
 
   describe '#get' do
-    let(:code) { nil }
-    let(:to_s) { nil }
-    let(:get) { double(code: code, to_s: to_s) }
-
-    before(:each) { RestClient.stub(:get).and_return(get) }
-
     context 'a successful HTTP get' do
-      let(:code) { 200 }
-      let(:to_s) { '{things: [1, 2, 3]}' }
-
       it 'returns the appropriate JSON result' do
         expect(search.send(:get)).to eq(to_s)
       end
