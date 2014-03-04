@@ -18,7 +18,29 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Searches
+
+Create a `Tapirgo::Search` instance with your Tapir API token and desired
+search string:
+
+    search = Tapirgo::Search.new('XXXXXXXXXXXXXX', 'example')
+
+Search results can be accessed individually or iterated over:
+
+    first_result = search[0]
+    search.each { |result| puts result }
+
+Each result has methods for all the data returned by the Tapir API:
+
+    result.title
+    result.score
+    result.link
+    result.content
+    result.summary
+    result.published
+
+For additional information, see the
+[Tapir documentation](http://tapirgo.com/#docs).
 
 ## Contributing
 
