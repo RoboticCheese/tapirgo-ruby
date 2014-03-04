@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['j@p4nt5.com']
   spec.summary       = %q{A simple Ruby library for the Tapir API}
   spec.description   = spec.summary
-  spec.homepage      = 'https://github.com/RoboticCheese/tapirgo'
+  spec.homepage      = 'https://github.com/RoboticCheese/tapirgo-ruby'
   spec.license       = 'Apache'
 
   spec.files         = `git ls-files -z`.split("\x0")
