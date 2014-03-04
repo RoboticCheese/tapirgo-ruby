@@ -1,3 +1,9 @@
+[![Gem Version](https://badge.fury.io/rb/tapirgo.png)](http://badge.fury.io/rb/tapirgo)
+[![Build Status](https://travis-ci.org/RoboticCheese/tapirgo-ruby.png?branch=master)](https://travis-ci.org/RoboticCheese/tapirgo-ruby)
+[![Code Climate](https://codeclimate.com/github/RoboticCheese/tapirgo-ruby.png)](https://codeclimate.com/github/RoboticCheese/tapirgo-ruby)
+[![Coverage Status](https://coveralls.io/repos/RoboticCheese/tapirgo-ruby/badge.png)](https://coveralls.io/r/RoboticCheese/tapirgo-ruby)
+[![Dependency Status](https://gemnasium.com/RoboticCheese/tapirgo-ruby.png)](https://gemnasium.com/RoboticCheese/tapirgo-ruby)
+
 # Tapirgo
 
 A simple Ruby library for the [Tapir](http://tapirgo.com/) API.
