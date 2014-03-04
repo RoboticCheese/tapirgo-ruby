@@ -21,7 +21,7 @@
 #
 # @author Jonathan Hartman <j@p4nt5.com>
 module Tapirgo
-  VERSION = '0.1.1.dev'
+  VERSION = '0.1.2'
 end
 
 # vim: ai et ts=2 sts=2 sw=2 ft=ruby
