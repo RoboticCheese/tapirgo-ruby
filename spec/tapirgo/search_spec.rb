@@ -26,6 +26,7 @@ describe Tapirgo::Search do
   let(:code) { 200 }
   let(:to_s) { '[{"things": [1, 2, 3]}]' }
   let(:api_get) { double(code: code, to_s: to_s) }
+  let(:json) { JSON.parse(to_s) }
 
   before(:each) do
     RestClient.stub(:get).and_return(api_get)
@@ -44,7 +45,19 @@ describe Tapirgo::Search do
     end
 
     it 'saves the set of search results' do
-      expect(search.instance_variable_get(:@results)).to eq(JSON.parse(to_s))
+      expect(search.instance_variable_get(:@results)).to eq(json)
+    end
+  end
+
+  describe '#[]' do
+    it 'returns the result at the given index' do
+      expect(search[0]).to eq(json[0])
+    end
+  end
+
+  describe '#each' do
+    it 'iterates over the array of search results' do
+      expect(search.each { |r| r }).to eq(json)
     end
   end
 

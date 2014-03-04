@@ -26,17 +26,28 @@ module Tapirgo
   #
   # @author Jonathan Hartman <j@p4nt5.com>
   class Search
-    include Errors
+    include Enumerable
+    include Tapirgo::Errors
 
     def initialize(token, query_str)
       @token = token
       @query = query_str
       @results = JSON.parse(get).map { |r| Search::Result.new(r) }
+      self
+    end
+
+    def [](index)
+      results[index]
+    end
+
+    def each
+      results.each { |r| yield(r) }
     end
 
     private
 
     attr_reader :token
+    attr_reader :results
 
     def get
       response = RestClient.get(uri, accept: :json)
