@@ -50,7 +50,7 @@ For additional information, see the
 
 ## Contributing
 
-1. Fork it ( http://github.com/RoboticCheese/tapirgo/fork )
+1. Fork it ( http://github.com/RoboticCheese/tapirgo-ruby/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Ensure all tests still pass and that your change is tested (`rake`)
 4. Commit your changes (`git commit -am 'Add some feature'`)
